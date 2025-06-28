@@ -35,17 +35,11 @@ cypress/
 - Node.js (version 14 or higher)
 - npm or yarn
 
-### Installation Steps
+### Installation
 
-1. Install dependencies:
+Install dependencies:
 ```bash
 npm install
-```
-
-2. Set up environment variables (optional):
-```bash
-# Create a .env file in the project root
-CYPRESS_BASE_URL=https://opensource-demo.orangehrmlive.com
 ```
 
 ## How to Run
