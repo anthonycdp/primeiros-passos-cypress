@@ -3,6 +3,7 @@ class myInfoPage {
     selectorList() {
         const selectors = {
             firstNameField: "[name='firstName']",
+            middleNameField: "[name='middleName']",
             lastNameField: "[name='lastName']",
             genericFiled: ".oxd-input--active",
             dateCloseButton: ".--close",
@@ -14,18 +15,27 @@ class myInfoPage {
         return selectors
     }
 
-    fillPersonalDetails() {
-        cy.get(this.selectorList().firstNameField).clear().type('Firstnametest')
-        cy.get(this.selectorList().lastNameField).clear().type('Lastnametest')
-        cy.get(this.selectorList().genericFiled).eq(3).clear().type('Employee')
-        cy.get(this.selectorList().genericFiled).eq(4).clear().type('OtherIdTest')
-        cy.get(this.selectorList().genericFiled).eq(5).clear().type('912837123897')
-        cy.get(this.selectorList().genericFiled).eq(6).clear().type('2023-05-01')
-        cy.get(this.selectorList().dateCloseButton).click()
+    fillPersonalDetails(firstName, middleName, lastName) {
+        cy.get(this.selectorList().firstNameField).clear().type(firstName)
+        cy.get(this.selectorList().middleNameField).clear().type(middleName)
+        cy.get(this.selectorList().lastNameField).clear().type(lastName)
+    }
+
+    fillEmplyeedetails(employeeId, otherId, driverLicense, driverLicenseDate) {
+        cy.get(this.selectorList().genericFiled).eq(3).clear().type(employeeId)
+        cy.get(this.selectorList().genericFiled).eq(4).clear().type(otherId)
+        cy.get(this.selectorList().genericFiled).eq(5).clear().type(driverLicense)
+        cy.get(this.selectorList().genericFiled).eq(6).clear().type(driverLicenseDate)
+    }
+    
+    fillStatus() {
         cy.get(this.selectorList().genericCombobox).eq(0).click()
         cy.get(this.selectorList().dropdownOption).contains('Brazilian').click()
         cy.get(this.selectorList().genericCombobox).eq(1).click()
         cy.get(this.selectorList().dropdownOption).contains('Other').click()
+    }
+
+    saveForm() {
         cy.get(this.selectorList().submitButton).eq(0).click()
         cy.get('.oxd-toast-close')
     }

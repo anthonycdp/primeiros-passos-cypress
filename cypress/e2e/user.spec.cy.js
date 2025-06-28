@@ -1,9 +1,12 @@
-import userData from '../fixtures/user-data.json'
-import loginPage from '../pages/loginPage.js'
-import dashboardPage from '../pages/dashboardPage.js'
-import menuPage from '../pages/menuPage.js'
-import myInfoPage from '../pages/myInfoPage.js'
+import userData from '../fixtures/user-data'
+import loginPage from '../pages/loginPage'
+import dashboardPage from '../pages/dashboardPage'
+import menuPage from '../pages/menuPage'
+import myInfoPage from '../pages/myInfoPage'
 
+const Chance = require('chance');
+
+const chance = new Chance();
 const login = new loginPage()
 const dashboard = new dashboardPage()
 const menu = new menuPage()
@@ -23,19 +26,15 @@ describe('ORANGE HRM TEST', () => {
 
   }
 
-  it.only('User Info Update - Success', () => {
+  it('User Info Update - Success', () => {
     login.accessLoginPage()
     login.loginWithUser(userData.userSuccess.username, userData.userSuccess.password)
     dashboard.verifyDashboardUrl()
     menu.accessMyInfo()
-    myInfo.fillPersonalDetails()
+    myInfo.fillPersonalDetails(chance.first(), chance.last(), chance.last())
+    myInfo.fillEmplyeedetails('employeeId', 'otherId', 'driverLicense', '2025-01-19')
+    myInfo.fillStatus()
+    myInfo.saveForm()
   })
 
-    it('Login - Fail', () => {
-    cy.visit('/auth/login')
-    cy.get(selectorList.usernameField).type(userData.userFail.username)
-    cy.get(selectorList.passwordField). type(userData.userFail.password)
-    cy.get(selectorList.loginButton).click()
-    cy.get(selectorList.wrongCredentialAlert)
-  })
 })
